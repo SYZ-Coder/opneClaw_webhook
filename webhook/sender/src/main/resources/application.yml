@@ -1,0 +1,40 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: sender
+  
+  web:
+    client:
+      timeout:
+        connect: 5000
+        read: 10000
+        write: 10000
+
+# OpenClaw Configuration
+openclaw:
+  local:
+    home: ${OPENCLAW_HOME:${user.home}/.openclaw}
+  webhook:
+    url: ${OPENCLAW_URL:http://localhost:18789}  # Accepts host root or full /hooks path
+    token: ${OPENCLAW_TOKEN:your-secret-token}  # Bearer token for authentication
+    default-session-key: ${OPENCLAW_HOOK_SESSION_KEY:hook:springboot-demo}
+    wait-result: ${OPENCLAW_WAIT_RESULT:true}
+    wait-timeout-ms: ${OPENCLAW_WAIT_TIMEOUT_MS:30000}
+    wait-poll-ms: ${OPENCLAW_WAIT_POLL_MS:400}
+    timeout: 30000
+    retry:
+      max-attempts: 3
+      delay: 1000
+  rpc:
+    command: ${OPENCLAW_RPC_COMMAND:openclaw}
+    submit-timeout-ms: ${OPENCLAW_RPC_SUBMIT_TIMEOUT_MS:10000}
+    wait-timeout-ms: ${OPENCLAW_RPC_WAIT_TIMEOUT_MS:30000}
+
+# Logging
+logging:
+  level:
+    com.example.demo: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.http: DEBUG
